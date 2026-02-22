@@ -41,6 +41,26 @@ imagen: document.getElementById("imagen").value
 })
 
 alert("Producto agregado");
+  mostrarProductos();
+}
+
+function mostrarProductos() {
+  const contenedor = document.getElementById("lista");
+
+  db.collection("productos").get().then((querySnapshot) => {
+    contenedor.innerHTML = "";
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      contenedor.innerHTML += `
+        <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+          <img src="${data.imagen}" width="100">
+          <h3>${data.nombre}</h3>
+          <p>$${data.precio}</p>
+        </div>
+      `;
+    });
+  });
+}
 
 }
 
