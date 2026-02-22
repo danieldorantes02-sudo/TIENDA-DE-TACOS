@@ -28,9 +28,20 @@
 
   window.login = function() {
     signInWithPopup(auth, provider)
-    .then((result) => {
-      alert("Bienvenido Admin");
-    })
+    signInWithPopup(auth, provider)
+.then((result) => {
+
+  const email = result.user.email;
+
+  if(email === "danieldorantes02@gmail.com"){
+    alert("Bienvenido Admin");
+    window.location.href = "panel.html";
+  } else {
+    alert("No tienes acceso");
+    auth.signOut();
+  }
+
+})
     .catch((error) => {
       alert("Error");
     });
