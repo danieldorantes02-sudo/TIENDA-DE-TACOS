@@ -78,9 +78,9 @@ function guardar(){
 
 let archivo = document.getElementById("imagen").files[0];
 
-let storageRef = firebase.storage().ref("productos/" + archivo.name);
+let storageRef = firebase.storage().ref("productos/" + archivo.files[0].name);
 
-storageRef.put(archivo).then((snapshot)=>{
+storageRef.put(archivo.files[0]).then((snapshot)=>{
 
 snapshot.ref.getDownloadURL().then((url)=>{
 
