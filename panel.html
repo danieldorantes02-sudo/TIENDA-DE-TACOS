@@ -75,14 +75,28 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 function guardar(){
+
+let archivo = document.getElementById("imagen").files[0];
+
+let storageRef = firebase.storage().ref("productos/" + archivo.name);
+
+storageRef.put(archivo).then((snapshot)=>{
+
+snapshot.ref.getDownloadURL().then((url)=>{
+
 db.collection("productos").add({
 nombre: document.getElementById("nombre").value,
 precio: document.getElementById("precio").value,
-imagen: document.getElementById("imagen").value
-}).then((=>{
+imagen: url
+}).then(()=>{
 alert("Producto agregado");
-  mostrarProductos();
+mostrarProductos();
 });
+
+});
+
+});
+
 }
 function mostrarProductos() {
   const contenedor = document.getElementById("lista");
